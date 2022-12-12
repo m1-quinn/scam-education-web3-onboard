@@ -1,0 +1,118 @@
+.App {
+  text-align: center;
+}
+
+body {
+  margin: 0;
+  font-family: 'Heebo', sans-serif;
+}
+
+code {
+  font-family: 'Heebo', sans-serif;
+}
+
+.erc721Button {
+  font-weight: bold;
+  color: black;
+  border-color: #FF5300;
+  border-width: 3px;
+  border-radius: 35px;
+  background-color: white;
+  padding: 15px;
+  text-align: center;
+  font-size: 16px;
+  cursor: pointer;
+  font-family: 'Heebo', sans-serif;
+}
+
+.erc721Button:hover {
+  color: white;
+  background-color: #FF5300;
+}
+
+.erc20Button {
+  font-weight: bold;
+  color: black;
+  border-color: #D4A0FF;
+  border-width: 3px;
+  border-radius: 35px;
+  background-color: white;
+  padding: 15px;
+  text-align: center;
+  font-size: 16px;
+  cursor: pointer;
+  font-family: 'Heebo', sans-serif;
+}
+
+.erc20Button:hover {
+  color: white;
+  background-color: #D4A0FF;
+}
+
+.miscButton {
+  font-weight: bold;
+  color: black;
+  border-color: black;
+  border-width: 3px;
+  border-radius: 35px;
+  background-color: white;
+  padding: 15px;
+  text-align: center;
+  font-size: 16px;
+  cursor: pointer;
+  font-family: 'Heebo', sans-serif;
+}
+
+.miscButton:hover {
+  color: white;
+  background-color: black;
+}
+
+.allowlistButton {
+  font-weight: bold;
+  color: black;
+  border-color: #90EE90;
+  border-width: 3px;
+  border-radius: 35px;
+  background-color: white;
+  padding: 15px;
+  text-align: center;
+  font-size: 16px;
+  cursor: pointer;
+  font-family: 'Heebo', sans-serif;
+}
+
+.allowlistButton:hover {
+  color: white;
+  background-color: #90EE90;
+}
+
+h4 {
+  font-size: large;
+  font-family: 'Heebo', sans-serif;
+  margin-bottom: 10px;
+  margin-top: 25px;
+}
+
+h5 {
+  font-size: medium;
+  font-family: 'Heebo', sans-serif;
+  margin: auto;
+  margin-bottom: 10px;
+}
+
+h6 {
+  font-size: small;
+  font-family: 'Heebo', sans-serif;
+  margin: auto;
+  margin-bottom: 10px;
+}
+
+.walletDisplay {
+  font-size: small;
+  font-family: 'Heebo', sans-serif;
+  font-weight: bold;
+  width: 100%;
+  display: block;
+  margin-bottom: 10px;
+}
