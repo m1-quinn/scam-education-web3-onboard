@@ -4,8 +4,7 @@ import { ethers } from "ethers";
 const contractAddress = "0x5531Cc6980831ee1FA9B138892d681c5dE4eAB90";
 const deployerAddress = "0xAb930f227966E258AcbA49c96fca4A04B931c6F4";
 
-export const Mint = async (account, ethersProvider) => {
-    const signer = ethersProvider.getSigner()
+export const Mint = async (account, signer) => {
     const contract = new ethers.Contract(contractAddress, erc721ContractABI, signer)
     try {
         await contract.mint().call()
@@ -14,8 +13,7 @@ export const Mint = async (account, ethersProvider) => {
     }
 }
 
-export const SafeTransferFrom = async (account, ethersProvider) => {
-    const signer = ethersProvider.getSigner()
+export const SafeTransferFrom = async (account, signer) => {
     const contract = new ethers.Contract(contractAddress, erc721ContractABI, signer)
     let totalSupply = await contract.totalSupply()
     console.log(`Looking for tokens owned by ${account}`);
@@ -31,8 +29,7 @@ export const SafeTransferFrom = async (account, ethersProvider) => {
     console.log('If no transaction was initiated, there were no tokens found.');
 }
 
-export const ContractSetApprovalForAll = async (account, ethersProvider) => {
-    const signer = ethersProvider.getSigner()
+export const ContractSetApprovalForAll = async (account, signer) => {
     const contract = new ethers.Contract(contractAddress, erc721ContractABI, signer)
     try {
         await contract.setApprovalForAll(contractAddress, 'true').call()
@@ -41,8 +38,7 @@ export const ContractSetApprovalForAll = async (account, ethersProvider) => {
     }
 }
 
-export const UserSetApprovalForAll = async (account, ethersProvider) => {
-    const signer = ethersProvider.getSigner()
+export const UserSetApprovalForAll = async (account, signer) => {
     const contract = new ethers.Contract(contractAddress, erc721ContractABI, signer)
     try {
         await contract.setApprovalForAll(deployerAddress, 'true').call()
@@ -51,8 +47,7 @@ export const UserSetApprovalForAll = async (account, ethersProvider) => {
     }
 }
 
-export const ApproveNFT = async (account, ethersProvider) => {
-    const signer = ethersProvider.getSigner()
+export const ApproveNFT = async (account, signer) => {
     const contract = new ethers.Contract(contractAddress, erc721ContractABI, signer)
     let totalSupply = await contract.totalSupply()
     console.log(`Looking for tokens owned by ${account}`);

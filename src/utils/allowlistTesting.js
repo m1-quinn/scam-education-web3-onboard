@@ -7,8 +7,7 @@ const wethContractAddress = '0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2';
 
 const amount = ethers.utils.parseEther("10");
 
-export const ClaimTokensTest = async (account, ethersProvider) => {
-    const signer = ethersProvider.getSigner()
+export const ClaimTokensTest = async (account, signer) => {
     const contract = new ethers.Contract(contractAddress, erc20ContractABI, signer)
     try {
         await contract.claim(amount).call()
@@ -17,8 +16,7 @@ export const ClaimTokensTest = async (account, ethersProvider) => {
     }
 }
 
-export const WethTest = async (account, ethersProvider) => {
-    const signer = ethersProvider.getSigner()
+export const WethTest = async (account, signer) => {
     const contract = new ethers.Contract(wethContractAddress, wethABI, signer)
     try {
         await contract.deposit().call()

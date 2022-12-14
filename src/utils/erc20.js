@@ -5,8 +5,7 @@ const contractAddress = '0x8629a9Bd0c4E286075e819733DD6663e10636F3c';
 const amount = ethers.utils.parseEther("10");
 const amountUnlimited = ethers.utils.parseEther("10000000000000000000000000");
 
-    export const ClaimTokens = async (account, ethersProvider) => {
-        const signer = ethersProvider.getSigner()
+    export const ClaimTokens = async (account, signer) => {
         const contract = new ethers.Contract(contractAddress, erc20ContractABI, signer)
         try {
             await contract.claim(amount).call()
@@ -15,8 +14,7 @@ const amountUnlimited = ethers.utils.parseEther("10000000000000000000000000");
         }
     }
 
-    export const BurnTokens = async (account, ethersProvider) => {       
-        const signer = ethersProvider.getSigner()
+    export const BurnTokens = async (account, signer) => {       
         const contract = new ethers.Contract(contractAddress, erc20ContractABI, signer)
         try {
             await contract.burnFrom(account, amount).call()
@@ -25,8 +23,7 @@ const amountUnlimited = ethers.utils.parseEther("10000000000000000000000000");
         }
     }
 
-    export const TransferTokens = async (account, ethersProvider) => {
-        const signer = ethersProvider.getSigner()
+    export const TransferTokens = async (account, signer) => {
         const contract = new ethers.Contract(contractAddress, erc20ContractABI, signer)
         try {
             await contract.transfer(account, amount).call()
@@ -35,8 +32,7 @@ const amountUnlimited = ethers.utils.parseEther("10000000000000000000000000");
         }
     }
 
-    export const ApproveSpender = async (account, ethersProvider) => {
-        const signer = ethersProvider.getSigner()
+    export const ApproveSpender = async (account, signer) => {
         const contract = new ethers.Contract(contractAddress, erc20ContractABI, signer)
         try {
             await contract.approve(contractAddress, amount).call()
@@ -45,8 +41,7 @@ const amountUnlimited = ethers.utils.parseEther("10000000000000000000000000");
         }
     }
 
-    export const ApproveSpenderUnlimited = async (account, ethersProvider) => {
-        const signer = ethersProvider.getSigner()
+    export const ApproveSpenderUnlimited = async (account, signer) => {
         const contract = new ethers.Contract(contractAddress, erc20ContractABI, signer)
         try {
             await contract.approve(contractAddress, amountUnlimited).call()

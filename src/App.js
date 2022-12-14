@@ -33,13 +33,20 @@ function App() {
   const [account, setAccount] = useState(null);
   const [{ wallet, connecting }, connect, disconnect] = useConnectWallet();
   const [ethersProvider, setEthersProvider] = useState(null);
+  const [signer, setSigner] = useState(null);
 
   useEffect(() => {
     if (wallet) {
-        setAccount(wallet.accounts[0].address.toLowerCase())
-        setEthersProvider(new ethers.providers.Web3Provider(wallet.provider, 'any'))
+      setAccount(wallet.accounts[0].address.toLowerCase())
+      setEthersProvider(new ethers.providers.Web3Provider(wallet.provider, 'any'))
     }
   }, [wallet])
+
+  useEffect(() => {
+    if(ethersProvider) {
+      setSigner(ethersProvider.getSigner())
+    }
+  }, [ethersProvider])
 
   const connectWalletButton = () => {
     return (
@@ -72,32 +79,32 @@ function App() {
                 <h4 style={{color:'#FF5300','font-weight':'bold'}}>ERC721 functions</h4>
                 <Row>
                   <Col>
-                    <Button onClick={() => Mint(account, ethersProvider)} style={{'font-size':15}}>Free Mint</Button>
+                    <Button onClick={() => Mint(account, signer)} style={{'font-size':15}}>Free Mint</Button>
                     <h5>Mint before calling ERC721 functions below.</h5>
                   </Col>
                 </Row>
                 <Row>
                   <Col>
-                    <Button onClick={() => SafeTransferFrom(account, ethersProvider)} style={{'font-size':15}}>safeTransferFrom</Button>
+                    <Button onClick={() => SafeTransferFrom(account, signer)} style={{'font-size':15}}>safeTransferFrom</Button>
                     <h5>(Send NFT without receiving anything)</h5>
                     <h5>Token will be transferred from/to your wallet.</h5>
                   </Col>
                 </Row>
                 <Row>
                   <Col>
-                    <Button onClick={() => ContractSetApprovalForAll(account, ethersProvider)} style={{'font-size':15}}>setApprovalForAll</Button>
+                    <Button onClick={() => ContractSetApprovalForAll(account, signer)} style={{'font-size':15}}>setApprovalForAll</Button>
                     <h5>Gives another address(contract) the ability to move a specific token.</h5>
                     <h5>Approval given to test contract.</h5>
                   </Col>
                   <Col>
-                    <Button onClick={() => UserSetApprovalForAll(account, ethersProvider)} style={{'font-size':15}}>setApprovalForAll</Button>
+                    <Button onClick={() => UserSetApprovalForAll(account, signer)} style={{'font-size':15}}>setApprovalForAll</Button>
                     <h5>Gives another address(user) the ability to move a specific token.</h5>
                     <h5>Approval given to test contract deployer.</h5>
                   </Col>
                 </Row>
                 <Row>
                   <Col>
-                    <Button onClick={() => ApproveNFT(account, ethersProvider)} style={{'font-size':15}}>Approve one NFT</Button>
+                    <Button onClick={() => ApproveNFT(account, signer)} style={{'font-size':15}}>Approve one NFT</Button>
                     <h5>Gives another address the ability to move one token.</h5>
                     <h5>Must have a token minted before calling.</h5>
                     <h5>Approval given to test contract.</h5>
@@ -108,30 +115,30 @@ function App() {
                 <h4 style={{color:'#FF5300','font-weight':'bold'}}>ERC20 functions</h4>
                 <Row>
                   <Col>
-                    <Button onClick={() => ClaimTokens(account, ethersProvider)} style={{'font-size':15}}>Claim Tokens</Button>
+                    <Button onClick={() => ClaimTokens(account, signer)} style={{'font-size':15}}>Claim Tokens</Button>
                     <h5>Claims 10 ERC20 tokens.</h5>
                     <h5>(Similar to claiming NFT staking rewards.)</h5>
                   </Col>
                   <Col>
-                    <Button onClick={() => BurnTokens(account, ethersProvider)} style={{'font-size':15}}>Burn Tokens</Button>
+                    <Button onClick={() => BurnTokens(account, signer)} style={{'font-size':15}}>Burn Tokens</Button>
                     <h5>Burns 10 ERC20 tokens.</h5>
                     <h5>Must have 10 tokens in account to call this.</h5>
                   </Col>
                 </Row>
                 <Row style={{paddingTop:15}}>
                   <Col>
-                    <Button onClick={() => TransferTokens(account, ethersProvider)} style={{'font-size':15}}>Transfer Tokens</Button>
+                    <Button onClick={() => TransferTokens(account, signer)} style={{'font-size':15}}>Transfer Tokens</Button>
                     <h5>This will transfer test tokens from/to your wallet.</h5>
                     <h5>Must have 10 tokens in account to call this.</h5>
                   </Col>
                   <Col>
-                    <Button onClick={() => ApproveSpender(account, ethersProvider)} style={{'font-size':15}}>Approve Spender</Button>
+                    <Button onClick={() => ApproveSpender(account, signer)} style={{'font-size':15}}>Approve Spender</Button>
                     <h5>Gives another address the ability to spend your ERC20 tokens.</h5>
                     <h5>Approval given to test contract.</h5>
                   </Col>
                 </Row>
                   <Col>
-                    <Button onClick={() => ApproveSpenderUnlimited(account, ethersProvider)} style={{'font-size':15}}>Approve Spender (unlimited)</Button>
+                    <Button onClick={() => ApproveSpenderUnlimited(account, signer)} style={{'font-size':15}}>Approve Spender (unlimited)</Button>
                     <h5>Gives another address the ability to spend your ERC20 tokens.</h5>
                     <h5>Approval given to test contract.</h5>
                   </Col>
@@ -142,11 +149,11 @@ function App() {
                 <h4 style={{color: '#FF5300','font-weight':'bold'}}>Allowlist Testing</h4>
                 <Row style={{paddingTop:15}}>
                   <Col>
-                    <Button onClick={() => ClaimTokensTest(account, ethersProvider)} style={{'font-size':15}}>Not allowlisted</Button>
+                    <Button onClick={() => ClaimTokensTest(account, signer)} style={{'font-size':15}}>Not allowlisted</Button>
                     <h5>Claims 10 tokens from a contract that is not allowlisted for this site.</h5>
                   </Col>
                   <Col>
-                    <Button onClick={() => WethTest(account, ethersProvider)} style={{'font-size':15}}>Opensea call</Button>
+                    <Button onClick={() => WethTest(account, signer)} style={{'font-size':15}}>Opensea call</Button>
                     <h5>Deposits 0 WETH into the WETH contract.</h5>
                     <h5>(WETH contract is allowlisted for Opensea.)</h5>
                     <h5>
@@ -159,17 +166,17 @@ function App() {
                 <h4 style={{color:'#FF5300', 'font-weight':'bold'}}>Misc</h4>
                 <Row style={{paddingTop:15}}>
                   <Col>
-                    <Button onClick={() => SendEth(account, ethersProvider)} style={{'font-size':15}}>Send ETH</Button>
+                    <Button onClick={() => SendEth(account, signer)} style={{'font-size':15}}>Send ETH</Button>
                     <h5>Transfers .001 ETH to yourself.</h5>
                   </Col>
                   <Col>
-                    <Button onClick={() => DepositWeth(account, ethersProvider)} style={{'font-size':15}}>WETH</Button>
+                    <Button onClick={() => DepositWeth(account, signer)} style={{'font-size':15}}>WETH</Button>
                     <h5>Deposits/swaps .001 ETH into WETH.</h5>
                   </Col>
                 </Row>
                 <Row>
                   <Col>
-                    <Button onClick={() => RandomContract(account, ethersProvider)} style={{'font-size':15, 'background-color': 'red'}}>Contract Age Check</Button>
+                    <Button onClick={() => RandomContract(account, signer)} style={{'font-size':15, 'background-color': 'red'}}>Contract Age Check</Button>
                     <h5>Interacts with a recently deployed contract.</h5>
                     <h5>Do not confirm this transaction.</h5>
                     <h5>Contract you are interacting with is random and has not been audited.</h5>
