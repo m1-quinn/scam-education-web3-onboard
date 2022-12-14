@@ -1,3 +1,5 @@
+This scam testing dApp uses web3-onboard and ethers.js 
+
 Before you can run:
 
 Create a .env file in the root of the projects directory containing:
